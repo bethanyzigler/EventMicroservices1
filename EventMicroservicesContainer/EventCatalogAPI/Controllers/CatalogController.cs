@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EventCatalogAPI.Data;
 using EventCatalogAPI.Domain;
+using EventCatalogAPI.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,14 +19,11 @@ namespace EventCatalogAPI.Controllers
     {
         private readonly CatalogContext _catalogContext;
         private readonly IConfiguration _configuration;
-        //private readonly IOptionsSnapshot<CatalogSettings> _settings;
 
         public CatalogController(CatalogContext catalogContext, IConfiguration configuration/*IOptionsSnapshot<CatalogSettings> settings*/)
         {
             _catalogContext = catalogContext;
             _configuration = configuration;
-            //_settings = settings;
-
         }
 
         [HttpGet]
@@ -61,17 +59,43 @@ namespace EventCatalogAPI.Controllers
                               .ToListAsync();
             eventsOnPage = ChangeUrlPlaceHolder(eventsOnPage);
 
-            //var model = new PaginatedItemsViewModel<CatalogEvent>
-            //    (pageIndex, pageSize, totalItems, itemsOnPage);
+            var model = new PaginatedEventsViewModel<CatalogEvent>
+                (pageIndex, pageSize, totalItems, eventsOnPage);
 
-            return Ok(eventsOnPage /*model*/);
+            return Ok(model);
 
         }
 
-        // GET api/Catalog/Items/type/1/brand/null[?pageSize=4&pageIndex=0]
+        [HttpGet]
+        [Route("[action]/withname/{name:minlength(1)}")]
+        public async Task<IActionResult> Events(
+            string name,
+            [FromQuery] int pageSize = 6,
+            [FromQuery] int pageIndex = 0
+            )
+        {
+            var totalItems = await _catalogContext.CatalogEvents
+                .Where(c => c.Name.StartsWith(name))
+                .LongCountAsync();
+            var eventsOnPage = await _catalogContext.CatalogEvents
+                .Where(c => c.Name.StartsWith(name))
+                .OrderBy(c => c.Name)
+                .Skip(pageIndex * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            eventsOnPage = ChangeUrlPlaceHolder(eventsOnPage);
+
+            var model = new PaginatedEventsViewModel<CatalogEvent>(pageIndex, pageSize, totalItems, eventsOnPage);
+            return Ok(model);
+
+        }
+
+        
         [HttpGet]
         [Route("[action]/type/{catalogTypeId}/company/{catalogCompanyId}")]
-        public async Task<IActionResult> Events(int? catalogTypeId,
+        public async Task<IActionResult> Events(
+            int? catalogTypeId,
             int? catalogCompanyId,
             [FromQuery] int pageSize = 6,
             [FromQuery] int pageIndex = 0)
@@ -90,16 +114,36 @@ namespace EventCatalogAPI.Controllers
             var totalItems = await root
                               .LongCountAsync();
             var eventsOnPage = await root
-
                               .OrderBy(c => c.Name)
                               .Skip(pageSize * pageIndex)
                               .Take(pageSize)
                               .ToListAsync();
             eventsOnPage = ChangeUrlPlaceHolder(eventsOnPage);
-            //var model = new PaginatedItemsViewModel<CatalogEvent>(pageIndex, pageSize, totalItems, eventsOnPage);
+            var model = new PaginatedEventsViewModel<CatalogEvent>
+                (pageIndex, pageSize, totalItems, eventsOnPage);
 
-            return Ok(eventsOnPage/*model*/);
+            return Ok(model);
 
+        }
+
+        [HttpPost]
+        [Route("items")]
+        public async Task<IActionResult> CreateEvent(
+            [FromBody] CatalogEvent @event
+            )
+        {
+            var item = new CatalogEvent
+            {
+                CatalogCompanyId = @event.CatalogCompanyId,
+                CatalogTypeId = @event.CatalogTypeId,
+                Description = @event.Description,
+                Name = @event.Name,
+                PictureUrl = @event.PictureUrl,
+                Price = @event.Price
+            };
+            _catalogContext.CatalogEvents.Add(item);
+            await _catalogContext.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetItemById), new { id = item.Id });
         }
 
         [HttpGet]
@@ -116,70 +160,11 @@ namespace EventCatalogAPI.Controllers
             {
                 @event.PictureUrl = @event.PictureUrl
                     .Replace("http://externalcatalogbaseurltobereplaced",
-                    _configuration/*_settings.Value.*/["ExternalCatalogBaseUrl"]);
+                    _configuration["ExternalCatalogBaseUrl"]);
                 return Ok(@event);
             }
             return NotFound();
-        }
-
-
-        [HttpPost]
-        [Route("items")]
-        public async Task<IActionResult> CreateProduct(
-            [FromBody] CatalogEvent product)
-        {
-            var item = new CatalogEvent
-            {
-                CatalogCompanyId = product.CatalogCompanyId,
-                CatalogTypeId = product.CatalogTypeId,
-                Description = product.Description,
-                Name = product.Name,
-                //PictureFileName = product.PictureFileName,
-                Price = product.Price
-            };
-            _catalogContext.CatalogEvents.Add(item);
-            await _catalogContext.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetItemById), new { id = item.Id });
-        }
-
-
-        [HttpPut]
-        [Route("items")]
-        public async Task<IActionResult> UpdateProduct(
-            [FromBody] CatalogEvent productToUpdate)
-        {
-            var catalogItem = await _catalogContext.CatalogEvents
-                              .SingleOrDefaultAsync
-                              (i => i.Id == productToUpdate.Id);
-            if (catalogItem == null)
-            {
-                return NotFound(new { Message = $"Item with id {productToUpdate.Id} not found." });
-            }
-            catalogItem = productToUpdate;
-            _catalogContext.CatalogEvents.Update(catalogItem);
-            await _catalogContext.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetItemById), new { id = productToUpdate.Id });
-        }
-
-
-        [HttpDelete]
-        [Route("{id}")]
-        public async Task<IActionResult> DeleteEvent(int id)
-        {
-            var product = await _catalogContext.CatalogEvents
-                .SingleOrDefaultAsync(p => p.Id == id);
-            if (product == null)
-            {
-                return NotFound();
-
-            }
-            _catalogContext.CatalogEvents.Remove(product);
-            await _catalogContext.SaveChangesAsync();
-            return NoContent();
-
-        }
-
+        }       
 
         private List<CatalogEvent> ChangeUrlPlaceHolder(List<CatalogEvent> events)
         {
@@ -187,7 +172,7 @@ namespace EventCatalogAPI.Controllers
                 x => x.PictureUrl =
                 x.PictureUrl
                 .Replace("http://externalcatalogbaseurltobereplaced",
-                _configuration/*_settings.Value.*/["ExternalCatalogBaseUrl"]));
+                _configuration["ExternalCatalogBaseUrl"]));
             return events;
         }
 
