@@ -6,10 +6,10 @@ networks:
 
 services:
   eventcatalog:
-    image: /eventcatalogapi
     build:
       context: .\EventCatalogAPI
       dockerfile: Dockerfile
+    image: events/eventcatalogapi     
     environment:
       DatabaseServer: mssqlserver
       DatabaseName: EventCatalogDb
