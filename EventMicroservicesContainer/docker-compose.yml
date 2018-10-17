@@ -17,7 +17,7 @@ services:
       DatabaseUserPassword: EventApi(!)
     container_name: eventcatalogapi
     ports:
-      - "5040:80"
+      - "5045:80"
     networks:
       - backend
       - frontend
@@ -29,7 +29,7 @@ services:
     ports:
       - "1447:1433"
 
-    container_name: mssqlcontainer
+    container_name: mssqlcontainer2
     environment:
       ACCEPT_EULA: Y
       SA_PASSWORD: EventApi(!)
