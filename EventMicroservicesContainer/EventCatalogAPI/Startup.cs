@@ -33,7 +33,7 @@ namespace EventCatalogAPI
             var server = Configuration["DatabaseServer"];
             var database = Configuration["DatabaseName"];
             var user = Configuration["DatabaseUser"];
-            var password = Configuration["DatabasePassword"];
+            var password = Configuration["DatabaseUserPassword"];
 
             var connectionString = $"Server={server};Database={database};User={user};Password={password}";
 

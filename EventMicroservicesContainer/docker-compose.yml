@@ -9,15 +9,15 @@ services:
     build:
       context: .\EventCatalogAPI
       dockerfile: Dockerfile
-    image: events/eventcatalogapi     
+    image: events/eventsbritecatalogapi     
     environment:
       DatabaseServer: mssqlserver
       DatabaseName: EventCatalogDb
       DatabaseUser: sa
       DatabaseUserPassword: EventApi(!)
-    container_name: eventcatalogapi
+    container_name: eventsbritecatalogapi
     ports:
-      - "5045:80"
+      - "5049:80"
     networks:
       - backend
       - frontend
@@ -27,9 +27,9 @@ services:
   mssqlserver:
     image: "microsoft/mssql-server-linux:latest"
     ports:
-      - "1447:1433"
+      - "1449:1433"
 
-    container_name: mssqlcontainer2
+    container_name: mssqlcontainer3
     environment:
       ACCEPT_EULA: Y
       SA_PASSWORD: EventApi(!)
