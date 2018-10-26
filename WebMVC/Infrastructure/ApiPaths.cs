@@ -38,7 +38,7 @@ namespace WebMvc.Infrastructure
                     filterQs = $"/type/{typeQs}/company/{companyQs}";
                 }
 
-                return $"{baseUri}items{filterQs}?pageIndex={page}&pageSize={take}";
+                return $"{baseUri}events{filterQs}?pageIndex={page}&pageSize={take}";
             }
 
             public static string GetCatalogEvent(string baseUri, int id)
@@ -46,9 +46,9 @@ namespace WebMvc.Infrastructure
 
                 return $"{baseUri}/events/{id}";
             }
-            public static string GetAllBrands(string baseUri)
+            public static string GetAllCompanies(string baseUri)
             {
-                return $"{baseUri}catalogEvents";
+                return $"{baseUri}catalogCompanies";
             }
 
             public static string GetAllTypes(string baseUri)

@@ -143,12 +143,12 @@ namespace EventCatalogAPI.Controllers
             };
             _catalogContext.CatalogEvents.Add(item);
             await _catalogContext.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetItemById), new { id = item.Id });
+            return CreatedAtAction(nameof(GetEventById), new { id = item.Id });
         }
 
         [HttpGet]
-        [Route("items/{id:int}")]
-        public async Task<IActionResult> GetItemById(int id)
+        [Route("events/{id:int}")]
+        public async Task<IActionResult> GetEventById(int id)
         {
             if (id <= 0)
             {
