@@ -9,10 +9,10 @@ services:
     build:
       context: .\EventCatalogAPI
       dockerfile: Dockerfile
-    image: events/eventsbritecatalogapi     
+    image: events/eventsbritecatalogapi    
     environment:
       DatabaseServer: mssqlserver
-      DatabaseName: EventCatalogDb
+      DatabaseName: EventCatalogDB
       DatabaseUser: sa
       DatabaseUserPassword: EventApi(!)
     container_name: eventsbritecatalogapi
