@@ -24,23 +24,23 @@ services:
     depends_on:
       - mssqlserver
 
- tokenserver:
-      build: 
-         context: .\TokenServiceApi
-         dockerfile: Dockerfile
-      environment: 
-         ASPNETCORE_ENVIRONMENT: Development 
-         MvcClient: http://localhost:61514  
-         BasketApiClient: http://localhost:5051
-         OrderApiClient: http://localhost:5601
-      container_name: tokenserviceapi
-      ports:
-         - "5020:80"
-      networks:
-         - backend
-         - frontend 
-      depends_on:
-         - mssqlserver
+  tokenserver:
+    build: 
+      context: .\TokenServiceApi
+      dockerfile: Dockerfile
+    environment: 
+      ASPNETCORE_ENVIRONMENT: Development 
+      MvcClient: http://localhost:61514  
+      BasketApiClient: http://localhost:5055
+      OrderApiClient: http://localhost:5605
+    container_name: tokenserviceapi
+    ports:
+      - "5021:80"
+    networks:
+      - backend
+      - frontend 
+    depends_on:
+      - mssqlserver
 
   mssqlserver:
     image: "microsoft/mssql-server-linux:latest"
