@@ -26,29 +26,29 @@ namespace WebMvc.Infrastructure
         }
         public static class Catalog
         {
-            public static string GetAllCatalogEvents(string baseUri, 
-                int page, int take, int? company, int? type)
+            public static string GetAllCatalogItems(string baseUri,
+                int page, int take, int? brand, int? type)
             {
                 var filterQs = string.Empty;
 
-                if (company.HasValue || type.HasValue)
+                if (brand.HasValue || type.HasValue)
                 {
-                    var companyQs = (company.HasValue) ? company.Value.ToString() : "null";
+                    var brandQs = (brand.HasValue) ? brand.Value.ToString() : "null";
                     var typeQs = (type.HasValue) ? type.Value.ToString() : "null";
-                    filterQs = $"/type/{typeQs}/company/{companyQs}";
+                    filterQs = $"/type/{typeQs}/brand/{brandQs}";
                 }
 
-                return $"{baseUri}events{filterQs}?pageIndex={page}&pageSize={take}";
+                return $"{baseUri}items{filterQs}?pageIndex={page}&pageSize={take}";
             }
 
-            public static string GetCatalogEvent(string baseUri, int id)
+            public static string GetCatalogItem(string baseUri, int id)
             {
 
-                return $"{baseUri}/events/{id}";
+                return $"{baseUri}/items/{id}";
             }
-            public static string GetAllCompanies(string baseUri)
+            public static string GetAllBrands(string baseUri)
             {
-                return $"{baseUri}catalogCompanies";
+                return $"{baseUri}catalogBrands";
             }
 
             public static string GetAllTypes(string baseUri)
