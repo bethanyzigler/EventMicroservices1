@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebMvc;
@@ -33,6 +34,7 @@ namespace WebMVC
 
 
             services.Configure<AppSettings>(Configuration);
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IHttpClient, CustomHttpClient>();
             services.AddTransient<ICatalogService, CatalogService>();
 
