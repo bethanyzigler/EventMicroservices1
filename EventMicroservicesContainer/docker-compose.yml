@@ -30,12 +30,12 @@ services:
       dockerfile: Dockerfile
     environment: 
       ASPNETCORE_ENVIRONMENT: Development 
-      MvcClient: http://localhost:61415  
+      MvcClient: http://localhost:44349  
       BasketApiClient: http://localhost:5055
       OrderApiClient: http://localhost:5605
     container_name: tokenserviceeventapi
     ports:
-      - "5021:80"
+      - "5025:80"
     networks:
       - backend
       - frontend 
