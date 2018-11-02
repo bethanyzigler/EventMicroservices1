@@ -24,8 +24,6 @@ services:
       - eventcatalog  
       - tokenserver
 
-
-
   eventcatalog:
     build:
       context: .\EventCatalogAPI
