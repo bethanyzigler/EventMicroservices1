@@ -47,8 +47,7 @@ namespace EventCatalogAPI.Data
             return new List<CatalogType>() //dummy list 
             {
                 new CatalogType {Type = "Fitness"},
-                new CatalogType {Type = "Technology"},
-                new CatalogType {Type = "Music"}
+                new CatalogType {Type = "Technology"}
             };
         }
 
@@ -58,10 +57,11 @@ namespace EventCatalogAPI.Data
             {
                 //need new pictureURLs
 
-                new CatalogEvent() { CatalogTypeId=2,CatalogCompanyId=3, Description = "Technology from the future", Name = "Future Tech", Price = 1.00M, PictureUrl = "http://externalcatalogbaseurltobereplaced/api/pic/1" },
+                new CatalogEvent() { CatalogTypeId=1,CatalogCompanyId=1, Description = "Techniques for safe running", Name = "Run Safe", Price = 12, PictureUrl = "http://externalcatalogbaseurltobereplaced/api/pic/4" },
                 new CatalogEvent() { CatalogTypeId=1,CatalogCompanyId=1, Description = "Home exercise strategies", Name = "Get Fit", Price= 0.0M, PictureUrl = "http://externalcatalogbaseurltobereplaced/api/pic/2" },
                 new CatalogEvent() { CatalogTypeId=2,CatalogCompanyId=2, Description = "Introduction to Iphone X", Name = "Iphone X", Price = 129, PictureUrl = "http://externalcatalogbaseurltobereplaced/api/pic/3" },
-                new CatalogEvent() { CatalogTypeId=1,CatalogCompanyId=1, Description = "Techniques for safe running", Name = "Run Safe", Price = 12, PictureUrl = "http://externalcatalogbaseurltobereplaced/api/pic/4" }
+                new CatalogEvent() { CatalogTypeId=2,CatalogCompanyId=3, Description = "Technology from the future", Name = "Future Tech", Price = 1.00M, PictureUrl = "http://externalcatalogbaseurltobereplaced/api/pic/1" }
+                
 
             };
         }
