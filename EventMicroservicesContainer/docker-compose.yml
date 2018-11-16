@@ -20,9 +20,10 @@ services:
       - "5300:80"
     networks:
       - frontend
-    depends_on: 
+    depends_on:
       - eventcatalog  
       - tokenserver
+      - order
 
   eventcatalog:
     build:
@@ -61,6 +62,29 @@ services:
     depends_on:
       - mssqlserver
 
+  order:
+    image: events/order
+    build: 
+      context: .\OrderApi
+      dockerfile: Dockerfile
+    
+    environment: 
+      ASPNETCORE_ENVIRONMENT: Development 
+      IdentityUrl: http://tokenserver
+      SQLSERVER_HOST: mssqlcontainer2
+      SA_PASSWORD: EventApi(!)
+      DATABASE: OrdersDb
+    container_name: orderapi2
+    ports:
+      - "5605:80"
+    networks:
+      - backend
+      - frontend 
+    depends_on:
+      - mssqlserver
+      - tokenserver 
+      - rabbitmq
+
   mssqlserver:
     image: "microsoft/mssql-server-linux:latest"
     ports:
@@ -72,3 +96,17 @@ services:
       SA_PASSWORD: EventApi(!)
     networks:
       - backend
+
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: myrabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "5671:5671"
+    volumes:
+      - ~/rabbitmq:/var/lib/rabbitmq/mnesia   
+    networks:
+      - backend 

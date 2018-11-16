@@ -34,6 +34,7 @@ namespace WebMVC
 
 
             services.Configure<AppSettings>(Configuration);
+            services.Configure<PaymentSettings>(Configuration);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IHttpClient, CustomHttpClient>();
             services.AddTransient<ICatalogService, CatalogService>();
