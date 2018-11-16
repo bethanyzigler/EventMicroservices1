@@ -77,7 +77,7 @@ namespace WebMvc.Controllers
 
         }
 
-            public async Task<IActionResult> AddToCart(CatalogItem productDetails)
+            public async Task<IActionResult> AddToCart(CatalogEvent productDetails)
         {
             try
             {
