@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Polly.CircuitBreaker;
 using WebMvc.Models;
-
 using WebMvc.Services;
 using WebMvc.ViewModels;
 using System;
