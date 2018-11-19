@@ -47,7 +47,7 @@ namespace WebMvc.Services
                 };
             }
             var basketItem = cart.Items
-                .Where(p => p.ProductId == product.ProductId)
+                .Where(p => p.EventId == product.EventId)
                 .FirstOrDefault();
             if (basketItem == null)
             {
@@ -99,10 +99,10 @@ namespace WebMvc.Services
             {
                 order.OrderItems.Add(new OrderItem()
                 {
-                    ProductId = int.Parse(x.ProductId),
+                    ProductId = int.Parse(x.EventId),
 
                     PictureUrl = x.PictureUrl,
-                    ProductName = x.ProductName,
+                    ProductName = x.EventName,
                     Units = x.Quantity,
                     UnitPrice = x.UnitPrice
                 });

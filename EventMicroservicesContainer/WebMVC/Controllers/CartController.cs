@@ -77,23 +77,23 @@ namespace WebMvc.Controllers
 
         }
 
-            public async Task<IActionResult> AddToCart(CatalogEvent productDetails)
+            public async Task<IActionResult> AddToCart(CatalogEvent eventDetails)
         {
             try
             {
-                if (productDetails.Id != null)
+                if (eventDetails.Id != null)
                 {
                     var user = _identityService.Get(HttpContext.User);
-                    var product = new CartItem()
+                    var @event = new CartItem()
                     {
                         Id = Guid.NewGuid().ToString(),
                         Quantity = 1,
-                        ProductName = productDetails.Name,
-                        PictureUrl = productDetails.PictureUrl,
-                        UnitPrice = productDetails.Price,
-                        ProductId = productDetails.Id
+                        EventName = eventDetails.Name,
+                        PictureUrl = eventDetails.PictureUrl,
+                        UnitPrice = eventDetails.Price,
+                        EventId = eventDetails.Id
                     };
-                    await _cartService.AddItemToCart(user, product);
+                    await _cartService.AddItemToCart(user, @event);
                 }
                 return RedirectToAction("Index", "Catalog");
             }

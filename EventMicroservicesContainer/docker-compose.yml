@@ -7,14 +7,14 @@ networks:
 services:
   webmvc:
     build: 
-      context: ..\WebMVC
+      context: .\WebMvc
       dockerfile: Dockerfile
     environment: 
       ASPNETCORE_ENVIRONMENT: Development
       CatalogUrl: http://eventcatalog 
       IdentityUrl: http://10.0.0.200:5025
-      #CartUrl: htt://cart 
-      #OrderUrl: htt://order  
+      CartUrl: http://cart 
+      OrderUrl: http://order  
     container_name: webshop
     ports:
       - "5300:80"
@@ -22,7 +22,8 @@ services:
       - frontend
     depends_on:
       - eventcatalog  
-      - tokenserver
+      - tokenserver      
+      - cart
       - order
 
   eventcatalog:
@@ -73,7 +74,14 @@ services:
       IdentityUrl: http://tokenserver
     container_name: cartapi
     ports:
-      - "5051:80"
+      - "5055:80"
+    networks:
+      - backend
+      - frontend 
+    depends_on:
+      - basket.data
+      - tokenserver
+      - rabbitmq
 
   order:
     image: events/order
@@ -87,7 +95,7 @@ services:
       SQLSERVER_HOST: mssqlcontainer2
       SA_PASSWORD: EventApi(!)
       DATABASE: OrdersDb
-    container_name: orderapi2
+    container_name: orderapi
     ports:
       - "5605:80"
     networks:
