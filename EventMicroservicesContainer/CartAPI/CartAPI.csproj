@@ -7,13 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Messaging\**" />
-    <Content Remove="Messaging\**" />
-    <EmbeddedResource Remove="Messaging\**" />
-    <None Remove="Messaging\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Infrastructure\" />
     <Folder Include="Model\" />
     <Folder Include="wwwroot\" />
