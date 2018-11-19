@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Reflection;
@@ -31,8 +30,8 @@ namespace OrderApi
 {
     public class Startup
     {
-        // private readonly string _connectionString;
-        ILogger _logger;
+        //private readonly string _connectionString;
+        readonly ILogger _logger;
 
         public IConfiguration Configuration { get; }
         public IContainer ApplicationContainer { get; private set; }
