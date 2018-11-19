@@ -94,8 +94,6 @@ services:
       - backend
       - frontend 
     depends_on:
-      - basket.data
-      - tokenserver
       - mssqlserver
       - tokenserver 
       - rabbitmq
