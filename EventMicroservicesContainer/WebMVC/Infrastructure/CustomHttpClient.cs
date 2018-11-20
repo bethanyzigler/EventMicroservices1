@@ -90,9 +90,9 @@ namespace WebMvc.Infrastructure
             return await DoPostPutAsync(HttpMethod.Post, uri, @event, authorizationToken, authorizationMethod);
         }
 
-        public async Task<HttpResponseMessage> PutAsync<T>(string uri, T item, string authorizationToken = null, string authorizationMethod = "Bearer")
+        public async Task<HttpResponseMessage> PutAsync<T>(string uri, T @event, string authorizationToken = null, string authorizationMethod = "Bearer")
         {
-            return await DoPostPutAsync(HttpMethod.Put, uri, item, authorizationToken, authorizationMethod);
+            return await DoPostPutAsync(HttpMethod.Put, uri, @event, authorizationToken, authorizationMethod);
         }
         public async Task<HttpResponseMessage> DeleteAsync(string uri, string authorizationToken = null, string authorizationMethod = "Bearer")
         {

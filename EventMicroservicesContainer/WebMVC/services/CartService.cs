@@ -34,7 +34,7 @@ namespace WebMvc.Services
         }
 
 
-        public async Task AddItemToCart(ApplicationUser user, CartItem product)
+        public async Task AddItemToCart(ApplicationUser user, CartItem @event)
         {
             var cart = await GetCart(user);
             _logger.LogDebug("User Name: " + user.Id);
@@ -47,11 +47,11 @@ namespace WebMvc.Services
                 };
             }
             var basketItem = cart.Items
-                .Where(p => p.EventId == product.EventId)
+                .Where(p => p.EventId == @event.EventId)
                 .FirstOrDefault();
             if (basketItem == null)
             {
-                cart.Items.Add(product);
+                cart.Items.Add(@event);
             }
             else
             {
