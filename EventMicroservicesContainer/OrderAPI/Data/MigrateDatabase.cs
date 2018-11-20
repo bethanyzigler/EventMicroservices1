@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ShoesOnContainers.Services.OrderApi.Data
+namespace EventMicroservicesContainer.Services.OrderApi.Data
 {
     public static class MigrateDatabase
     {

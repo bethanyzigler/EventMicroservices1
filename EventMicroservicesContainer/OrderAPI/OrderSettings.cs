@@ -1,4 +1,4 @@
-﻿namespace ShoesOnContainers.Services.OrderApi 
+﻿namespace EventMicroservicesContainer.Services.OrderApi 
 {
     public class OrderSettings
     {

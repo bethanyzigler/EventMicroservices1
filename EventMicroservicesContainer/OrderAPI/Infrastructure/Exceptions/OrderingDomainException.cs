@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ShoesOnContainers.Services.OrderApi.Exceptions
+namespace EventMicroservicesContainer.Services.OrderApi.Exceptions
 {
     /// <summary>
     /// Exception type for domain exceptions

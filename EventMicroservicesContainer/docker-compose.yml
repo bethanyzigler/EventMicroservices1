@@ -12,7 +12,7 @@ services:
     environment: 
       ASPNETCORE_ENVIRONMENT: Development
       CatalogUrl: http://eventcatalog 
-      IdentityUrl: http://10.0.0.200:5025
+      IdentityUrl: http://10.0.0.68:5025
       CartUrl: http://cart 
       OrderUrl: http://order  
     container_name: webshop

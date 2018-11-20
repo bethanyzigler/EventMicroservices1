@@ -21,9 +21,9 @@ using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RabbitMQ.Client;
-using ShoesOnContainers.Services.OrderApi;
-using ShoesOnContainers.Services.OrderApi.Data;
-using ShoesOnContainers.Services.OrderApi.Infrastructure.Filters;
+using EventMicroservicesContainer.Services.OrderApi;
+using EventMicroservicesContainer.Services.OrderApi.Data;
+using EventMicroservicesContainer.Services.OrderApi.Infrastructure.Filters;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace OrderApi

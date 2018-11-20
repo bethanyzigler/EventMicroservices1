@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
-using ShoesOnContainers.Services.OrderApi.Exceptions;
-using ShoesOnContainers.Services.OrderApi.Infrastructure.ActionResults;
+using EventMicroservicesContainer.Services.OrderApi.Exceptions;
+using EventMicroservicesContainer.Services.OrderApi.Infrastructure.ActionResults;
 using System.Net;
 
-namespace ShoesOnContainers.Services.OrderApi.Infrastructure.Filters
+namespace EventMicroservicesContainer.Services.OrderApi.Infrastructure.Filters
 {
     public class HttpGlobalExceptionFilter : IExceptionFilter
     {

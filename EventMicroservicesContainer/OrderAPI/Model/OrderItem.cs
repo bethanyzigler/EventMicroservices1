@@ -1,4 +1,4 @@
-﻿using ShoesOnContainers.Services.OrderApi.Exceptions;
+﻿using EventMicroservicesContainer.Services.OrderApi.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ShoesOnContainers.Services.OrderApi.Models
+namespace EventMicroservicesContainer.Services.OrderApi.Models
 {
     public class OrderItem
     {
