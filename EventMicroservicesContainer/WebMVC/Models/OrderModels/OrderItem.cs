@@ -7,9 +7,9 @@ namespace WebMvc.Models.OrderModels
 {
     public class OrderItem
     {
-        public int ProductId { get; set; }
+        public int EventId { get; set; }
 
-        public string ProductName { get; set; }
+        public string EventName { get; set; }
 
         public decimal UnitPrice { get; set; }
 

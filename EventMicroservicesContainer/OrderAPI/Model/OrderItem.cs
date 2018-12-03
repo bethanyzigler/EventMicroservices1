@@ -14,27 +14,27 @@ namespace EventMicroservicesContainer.Services.OrderApi.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
          
-         public string ProductName { get; set; }
+         public string EventName { get; set; }
         public string PictureUrl { get; set; }
         public decimal UnitPrice { get; set; }
         
         public int Units { get; set; }
-        public int ProductId { get; private set; }
+        public int EventId { get; private set; }
 
         protected OrderItem() { }
         public Order Order { get; set; }
         public int OrderId { get; set; }
 
-        public OrderItem(int productId, string productName, decimal unitPrice,   string pictureUrl, int units = 1)
+        public OrderItem(int eventId, string eventName, decimal unitPrice,   string pictureUrl, int units = 1)
         {
             if (units <= 0)
             {
                 throw new OrderingDomainException("Invalid number of units");
             }
 
-            ProductId = productId;
+            EventId = eventId;
 
-            ProductName = productName;
+            EventName = eventName;
             UnitPrice = unitPrice;
             
             Units = units;

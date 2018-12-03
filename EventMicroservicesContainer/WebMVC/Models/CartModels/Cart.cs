@@ -7,12 +7,12 @@ namespace WebMvc.Models.CartModels
 {
     public class Cart
     {
-        public List<CartItem> Items { get; set; } = new List<CartItem>();
+        public List<CartItem> Events { get; set; } = new List<CartItem>();
         public string BuyerId { get; set; }
 
         public decimal Total()
         {
-            return Math.Round(Items.Sum(x => x.UnitPrice * x.Quantity), 2);
+            return Math.Round(Events.Sum(x => x.UnitPrice * x.Quantity), 2);
         }
 
     }

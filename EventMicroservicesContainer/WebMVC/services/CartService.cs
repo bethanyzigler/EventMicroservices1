@@ -43,15 +43,15 @@ namespace WebMvc.Services
                 cart = new Cart()
                 {
                     BuyerId = user.Id,
-                    Items = new List<CartItem>()
+                    Events = new List<CartItem>()
                 };
             }
-            var basketItem = cart.Items
+            var basketItem = cart.Events
                 .Where(p => p.EventId == @event.EventId)
                 .FirstOrDefault();
             if (basketItem == null)
             {
-                cart.Items.Add(@event);
+                cart.Events.Add(@event);
             }
             else
             {
@@ -95,14 +95,14 @@ namespace WebMvc.Services
             var order = new Order();
             order.OrderTotal = 0;
 
-            cart.Items.ForEach(x =>
+            cart.Events.ForEach(x =>
             {
                 order.OrderItems.Add(new OrderItem()
                 {
-                    ProductId = int.Parse(x.EventId),
+                    EventId = int.Parse(x.EventId),
 
                     PictureUrl = x.PictureUrl,
-                    ProductName = x.EventName,
+                    EventName = x.EventName,
                     Units = x.Quantity,
                     UnitPrice = x.UnitPrice
                 });
@@ -117,7 +117,7 @@ namespace WebMvc.Services
         {
             var basket = await GetCart(user);
 
-            basket.Items.ForEach(x =>
+            basket.Events.ForEach(x =>
             {
                 // Simplify this logic by using the
                 // new out variable initializer.

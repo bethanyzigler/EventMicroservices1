@@ -5,10 +5,10 @@ EXPOSE 44389
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
-COPY ["../TokenServiceApi/TokenServiceApi.csproj", "../TokenServiceApi/"]
-RUN dotnet restore "../TokenServiceApi/TokenServiceApi.csproj"
+COPY ["./TokenServiceApi/TokenServiceApi.csproj", "./TokenServiceApi/"]
+RUN dotnet restore "./TokenServiceApi/TokenServiceApi.csproj"
 COPY . .
-WORKDIR "/src/../TokenServiceApi"
+WORKDIR "/src/./TokenServiceApi"
 RUN dotnet build "TokenServiceApi.csproj" -c Release -o /app
 
 FROM build AS publish
@@ -18,3 +18,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "TokenServiceApi.dll"]
+
