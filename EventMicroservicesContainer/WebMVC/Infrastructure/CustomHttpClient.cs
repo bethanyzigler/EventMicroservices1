@@ -29,7 +29,7 @@ namespace WebMvc.Infrastructure
         {
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
 
-            // SetAuthorizationHeader(requestMessage);
+            SetAuthorizationHeader(requestMessage);
             if (authorizationToken != null)
             {
 
@@ -56,7 +56,7 @@ namespace WebMvc.Infrastructure
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, uri);
 
             requestMessage.Content = new StringContent(JsonConvert.SerializeObject(@event), System.Text.Encoding.UTF8, "application/json");
-            //  SetAuthorizationHeader(requestMessage);
+            SetAuthorizationHeader(requestMessage);
             if (authorizationToken != null)
             {
 

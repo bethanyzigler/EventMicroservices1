@@ -69,7 +69,7 @@ namespace WebMvc.Services
                 throw new Exception("Error creating order, try later.");
             }
            
-           // response.EnsureSuccessStatusCode();
+            //response.EnsureSuccessStatusCode();
             var jsonString = response.Content.ReadAsStringAsync();
 
             jsonString.Wait();
