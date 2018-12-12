@@ -22,7 +22,7 @@ namespace EventMicroservicesContainer.Services.OrderApi.Controllers
     {
 
         private readonly OrdersContext _ordersContext;
-      private readonly IOptionsSnapshot<OrderSettings> _settings;
+        private readonly IOptionsSnapshot<OrderSettings> _settings;
 
 
         private readonly ILogger<OrdersController> _logger;
@@ -71,14 +71,14 @@ namespace EventMicroservicesContainer.Services.OrderApi.Controllers
                 _logger.LogWarning("BuyerId is: " + order.BuyerId);
                 _bus.Publish(new OrderCompletedEvent(order.BuyerId)).Wait();
                 return CreatedAtRoute("GetOrder", new { id = order.OrderId }, order);
-            }
+        }
             catch (DbUpdateException ex)
             {
                 _logger.LogError("An error occored during Order saving .." + ex.Message);
                 return BadRequest();
-            }
+    }
 
-        }
+}
 
         [HttpGet("{id}", Name = "GetOrder")]
         //  [Route("{id}")]
